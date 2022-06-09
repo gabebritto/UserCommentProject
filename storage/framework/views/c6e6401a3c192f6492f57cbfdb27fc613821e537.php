@@ -3,7 +3,7 @@
 <?php $__env->startSection('title', 'Criar usuário'); ?>
 
 <?php $__env->startSection('Content'); ?>
-<h1>Cadastrar Usuário</h1>
+<h1 class="text-2x1 font-semibold leading-tigh py-2">Cadastrar Usuário</h1>
 <?php echo $__env->make('includes.validations-form', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <form action="<?php echo e(route('users.store')); ?>" method="post">

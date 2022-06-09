@@ -72,7 +72,12 @@ class User extends Authenticatable
         $data = $request->all();
         $data['password'] = bcrypt($request->password);
         
-        $user=$this->create($data);
+        $user = $this -> create($data);
         return $user;
+    }
+
+    public function comments()
+    {
+        return $this -> hasMany(Comment::class, 'user_id', 'id')->where('visible', 'true');
     }
 }

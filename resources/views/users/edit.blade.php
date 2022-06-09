@@ -3,7 +3,7 @@
 @section('title', "Editar usuário")
 
 @section('Content')
-<h1>Editar Usuário</h1>
+<h1 class="text-2x1 font-semibold leading-tigh py-2">Editar Usuário</h1>
 @include('includes.validations-form')
 
     <form action="{{ route('users.update', $user->id) }}" method="post">
