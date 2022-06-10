@@ -11,9 +11,11 @@ Route::get('/', function () {
 });
 
 /*Comments */
-Route::post('users/{id}/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::put('/comments/{id}', [CommentController::class, 'update'])->name('comments.update');
 Route::get('users/{id}/comments/create', [CommentController::class, 'create'])->name('comments.create');
+Route::get('users/{user}/comments/{id}', [CommentController::class, 'edit'])->name('comments.edit');
 Route::get('users/{id}/comments', [CommentController::class, 'index'])->name('comments.index');
+Route::post('users/{id}/comments', [CommentController::class, 'store'])->name('comments.store');
 
 /*Users*/
 Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');

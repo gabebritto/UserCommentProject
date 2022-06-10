@@ -78,6 +78,6 @@ class User extends Authenticatable
 
     public function comments()
     {
-        return $this -> hasMany(Comment::class, 'user_id', 'id')->where('visible', 'true');
+        return $this->hasMany(Comment::class, 'user_id', 'id');
     }
 }

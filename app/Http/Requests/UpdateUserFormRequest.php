@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use phpDocumentor\Reflection\Types\Nullable;
 
-class StoreUpdateUserFormRequest extends FormRequest
+class UpdateUserFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -48,15 +47,6 @@ class StoreUpdateUserFormRequest extends FormRequest
             ]
         ];
 
-        if ($this->isMethod('PUT'))
-        {
-            $rules['password'] = [
-                'nullable',
-                'min:6',
-                'max:15',
-            ];
-        }
-        
         return $rules;
     }
 }

@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title', 'Criar usuário'); ?>
 
 <?php $__env->startSection('Content'); ?>
