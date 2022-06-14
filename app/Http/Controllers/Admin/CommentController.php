@@ -26,10 +26,7 @@ class CommentController extends Controller
         {
             return redirect()->back();
         }
-
-        $comments = $user->comments()
-        ->where('body', 'LIKE', "%$request->search%")
-        ->get();
+        $comments = $user->comments()->where('body', 'LIKE', "%$request->search%")->paginate(2);
         return view('users.comments.index', compact('user', 'comments'));
     }
     
@@ -39,7 +36,6 @@ class CommentController extends Controller
         {
             return redirect()->back();
         }
-
         return view('users.comments.create', compact('user'));
     }
 

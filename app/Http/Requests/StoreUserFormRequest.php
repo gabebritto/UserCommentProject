@@ -45,6 +45,13 @@ class StoreUserFormRequest extends FormRequest
                 'required',
                 'min:6',
                 'max:15',
+            ],
+
+            'image' => [
+                'nullable',
+                'image',
+                'mimes:jpeg,png,jpg,gif,svg',
+                'max:1024'
             ]
         ];
         

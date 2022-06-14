@@ -15,6 +15,7 @@
     <table class="min-w-full">
         <thead>
             <tr>
+                <th class="px-5 py-3 border-b-2 border-gray-200 bg-blue-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider rounded">Foto</th>
                 <th class="px-5 py-3 border-b-2 border-gray-200 bg-blue-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider rounded">Nome</th>
                 <th class="px-5 py-3 border-b-2 border-gray-200 bg-blue-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider rounded">Email</th>
                 <th class="px-5 py-3 border-b-2 border-gray-200 bg-blue-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider rounded">Editar</th>
@@ -27,14 +28,23 @@
             @foreach ($users as $user)
             <tr>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    {{ $user->name }}
+                    @if ($user->image)
+                        <img src="{{ url("storage/{$user->image}") }}" alt="User_Image" class="object-cover w-20">
+                    @else
+                        <img src="{{ url("images/UserDefault.webp") }}" alt="Default_Image" class="object-cover w-20">                        
+                    @endif
                 </td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $user->name }}</td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $user->email }}</td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm"><a href="{{ route('users.edit', ['id' => $user->id]) }}" class="bg-green-300 rounded-full py-2 px-6">Edit</a></td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm"><a href=" {{ route('users.show', ['id' => $user->id]) }}" class="bg-green-300 rounded-full py-2 px-6">Details</a></td>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm"><a href=" {{ route('comments.index', ['id' => $user->id]) }}" class="bg-green-300 rounded-full py-2 px-6">Comentários (0)</a></td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm"><a href=" {{ route('comments.index', ['id' => $user->id]) }}" class="bg-green-300 rounded-full py-2 px-6">Comentários ({{$user->comments->count()}})</a></td>
             </tr>
             @endforeach
         </tbody>
     </table>
+    
+    <div class="py-4">
+        {{ $users->links() }}
+    </div>
 @endsection

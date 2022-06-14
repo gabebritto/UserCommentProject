@@ -10,6 +10,10 @@
 </head>
 <body class="bg-gray-200">
     <div class="content mx-auto px-4 py-8">
+        <form action="{{route('logout')}}" method="post">
+            @csrf
+            <button type="submit" class="inline">Logout</button>
+        </form>
         @yield('Content')
     </div>
 </body>

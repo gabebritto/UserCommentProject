@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -22,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image'
     ];
 
     /**
@@ -51,18 +53,25 @@ class User extends Authenticatable
                 $query->where('email',"$search");
                 $query->orWhere('name', 'LIKE', "%{$search}%");
             };
-        })->get();
+        })->with('comments')
+        ->paginate(10);
 
         return $users;
     }
 
-    public function updateUser($request)
+    public function updateUser($request, $user)
     {
         $data = $request->only('name', 'email');
         if ($request->password)
         {
             $data['password'] = bcrypt($request->password);
         }
+        if($img = $request->image){
+            if ($user->image && Storage::exists($user->image)){
+                Storage::delete($user->image);
+            }
+            $data['image'] = $img->store('users');
+        }        
 
         return $data;
     }
@@ -71,7 +80,9 @@ class User extends Authenticatable
     {
         $data = $request->all();
         $data['password'] = bcrypt($request->password);
-        
+        if($img = $request->image){
+            $data['image'] = $img->store('users');
+        }
         $user = $this -> create($data);
         return $user;
     }

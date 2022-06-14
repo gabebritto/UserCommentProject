@@ -34,4 +34,8 @@
             @endforeach
         </tbody>
     </table>
+
+    <div class="py-4">
+        {{ $comments->links() }}
+    </div>
 @endsection

@@ -10,6 +10,10 @@
 </head>
 <body class="bg-gray-200">
     <div class="content mx-auto px-4 py-8">
+        <form action="<?php echo e(route('logout')); ?>" method="post">
+            <?php echo csrf_field(); ?>
+            <button type="submit" class="inline">Logout</button>
+        </form>
         <?php echo $__env->yieldContent('Content'); ?>
     </div>
 </body>
